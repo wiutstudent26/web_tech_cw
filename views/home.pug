@@ -1,0 +1,11 @@
+extends layout.pug 
+block Content 
+    .note-list 
+        //- if (notes.length !== 0)
+        //-         each note in notes
+        p.noteItem #{note.description}
+            span.buttons
+                a.editButton(href=`/notes/${note.id}/update`) Edit 
+                a.deleteButton(href=`/notes/${note.id}/deleteunarchived`) Delete
+        //- else
+        //-     p There are no any notes...

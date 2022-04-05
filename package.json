@@ -1,0 +1,25 @@
+{
+  "name": "web_tech_cw",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wiutstudent26/web_tech_cw.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wiutstudent26/web_tech_cw/issues"
+  },
+  "homepage": "https://github.com/wiutstudent26/web_tech_cw#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "pug": "^3.0.2",
+    "sqlite3": "^5.0.2"
+  }
+}
