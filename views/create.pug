@@ -5,5 +5,5 @@ block Content
         if error
             p.error Input cannot be empty please fill in the form...
         form.addForm(action="/create", method="post")
-            input.addInput(type="text" name = "note")
-            button.btnAdd Add new note
+            input(type="text" name = "note")
+            button Add new note

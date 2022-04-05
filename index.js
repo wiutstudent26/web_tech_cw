@@ -33,12 +33,12 @@ app.post('/create', (req, res) => {
   let select = 'select * from notes';
 
   if (input.note.length === 0) {
-    res.render('create', { fail: true });
+    res.render('create', { error: true });
   } else {
     db.run(insert, [input.note], (err) => {
       if (err) throw err;
 
-      db.all('select * FROM notes', [], (err, rows) => {
+      db.all('select * from notes', [], (err, rows) => {
         if (err) throw err;
 
         res.redirect('/');
@@ -59,7 +59,7 @@ app.get('/notes/:id/delete', (req, res) => {
 
 app.get('/notes/:id/edit', (req, res) => {
   let id = req.params.id;
-  let select = 'select * from notes WHERE id = ?';
+  let select = 'select * from notes where id = ?';
   db.get(select, id, (err, row) => {
     res.render('update', { id: id, note: row });
   });
@@ -73,7 +73,7 @@ app.post(`/notes/:id/edit`, (req, res) => {
 
   if (input.note.length === 0) {
     db.get(select, id, (err, row) => {
-      res.render('edit', { note: row, id: id, fail: true });
+      res.render('update', { note: row, id: id, error: true });
     });
   } else {
     db.run(update, [input.note, id], (err) => {

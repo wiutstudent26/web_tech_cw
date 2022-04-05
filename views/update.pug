@@ -2,8 +2,8 @@ extends layout
 block Content 
     .edit-container
         h3 Edit your note
-        if fail 
-            p.fail Input cannot be empty...        
+        if error 
+            p.error Input cannot be empty...        
         form.form-edit(action = `/notes/${id}/edit`, method="post")
             input(type="text" name='note' value = `${note.content}`)
             button Update

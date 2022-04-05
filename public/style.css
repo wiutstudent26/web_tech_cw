@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.nav-cont {
+  background-color: #add8e6;
+  text-align: center;
+  margin-top: 50px;
+  padding: 10px 82px;
+  border: 1px solid #000;
+}
+.nav-cont a {
+  text-decoration: none;
+  color: #000;
+  font-size: 2rem;
+  margin: 10px 20px;
+  font-weight: 600;
+}
+h3 {
+  text-align: center;
+  margin: 20px;
+  font-size: 2rem;
+}
+.noteItem {
+  background-color: #fadbe0;
+  font-weight: 600;
+  padding: 10px 20px;
+  width: 500px;
+  color: #000;
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #000;
+  cursor: text;
+}
+
+.buttons {
+  margin: auto;
+  margin-right: -10px;
+}
+
+.buttons a {
+  color: #00f;
+  text-decoration: none;
+  padding: 10px;
+}
+
+.addForm,
+.form-edit {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  width: 500px;
+  padding: 5px 10px;
+  margin: 10px 0;
+  font-weight: 600;
+}
+
+button {
+  width: 150px;
+  padding: 5px 10px;
+  font-weight: 600;
+  margin-left: 180px;
+}
+
+.error {
+  background-color: #f00;
+  padding: 10px;
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+}

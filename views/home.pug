@@ -1,11 +1,12 @@
 extends layout.pug 
 block Content 
     .note-list 
-        //- if (notes.length !== 0)
-        each note in notes
-            p.noteItem #{note.content}
-                span.buttons
-                    a.editButton(href=`/notes/${note.id}/edit`) Edit 
-                    a.deleteButton(href=`/notes/${note.id}/delete`) Delete
-        //- else
-        //-     p There are no any notes...
+        h3 Note list 
+        if (notes.length !== 0)
+            each note in notes
+                p.noteItem #{note.content}
+                    span.buttons
+                        a.editButton(href=`/notes/${note.id}/edit`) Edit 
+                        a.deleteButton(href=`/notes/${note.id}/delete`) Delete
+        else
+            p There are no any notes...
