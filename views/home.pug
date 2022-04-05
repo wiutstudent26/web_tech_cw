@@ -3,9 +3,9 @@ block Content
     .note-list 
         //- if (notes.length !== 0)
         //-         each note in notes
-        p.noteItem #{note.description}
+        p.noteItem Note 1
             span.buttons
-                a.editButton(href=`/notes/${note.id}/update`) Edit 
-                a.deleteButton(href=`/notes/${note.id}/deleteunarchived`) Delete
+                a.editButton(href=`/notes/update`) Edit 
+                a.deleteButton(href=`/notes/deleteunarchived`) Delete
         //- else
         //-     p There are no any notes...
