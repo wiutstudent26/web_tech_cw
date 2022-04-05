@@ -2,10 +2,10 @@ extends layout.pug
 block Content 
     .note-list 
         //- if (notes.length !== 0)
-        //-         each note in notes
-        p.noteItem Note 1
-            span.buttons
-                a.editButton(href=`/notes/update`) Edit 
-                a.deleteButton(href=`/notes/deleteunarchived`) Delete
+        each note in notes
+            p.noteItem #{note.content}
+                span.buttons
+                    a.editButton(href=`/notes/${note.id}/edit`) Edit 
+                    a.deleteButton(href=`/notes/${note.id}/delete`) Delete
         //- else
         //-     p There are no any notes...

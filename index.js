@@ -6,27 +6,20 @@ app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'pug');
 app.use('/static', express.static('public'));
 
-const db = new sqlite3.Database('./notes.db', sqlite3.OPEN_READWRITE, (err) => {
-  if (err) console.log(err.message);
+let db = new sqlite3.Database('./notes.db', sqlite3.OPEN_READWRITE, (err) => {
+  if (err) throw err;
 
   console.log('Conected to database...');
 });
 
-// db.run('create table notes (id integer primary key, content VARCHAR(255))');
-
-app.get('/home', (req, res) => {
-  res.render('home');
-});
+// let create = 'create table notes (id integer primary key, content VARCHAR(255))'
+// db.run(create);
 
 app.get('/', (req, res) => {
-  res.render('home');
-});
+  db.all('select * FROM notes', [], (err, rows) => {
+    if (err) throw err;
 
-app.get('/notes', (req, res) => {
-  db.all('select * FROM notes WHERE archived = 0', [], (err, rows) => {
-    if (err) console.log(err.message);
-
-    res.render('notes', { notes: rows });
+    res.render('home', { notes: rows });
   });
 });
 
@@ -35,24 +28,59 @@ app.get('/create', (req, res) => {
 });
 
 app.post('/create', (req, res) => {
-  const userInput = req.body;
+  let input = req.body;
+  let insert = 'insert into notes(content) values (?)';
+  let select = 'select * from notes';
 
-  if (userInput.note.length === 0) {
+  if (input.note.length === 0) {
     res.render('create', { fail: true });
   } else {
-    db.run(
-      'insert into notes(description, archived) values (?, 0)',
-      [userInput.note],
-      (err) => {
-        if (err) console.log(err.message);
+    db.run(insert, [input.note], (err) => {
+      if (err) throw err;
 
-        db.all('select * FROM notes WHERE archived = 0', [], (err, rows) => {
-          if (err) console.log(err.message);
+      db.all('select * FROM notes', [], (err, rows) => {
+        if (err) throw err;
 
-          res.render('notes', { notes: rows });
-        });
-      }
-    );
+        res.redirect('/');
+      });
+    });
+  }
+});
+
+app.get('/notes/:id/delete', (req, res) => {
+  let id = req.params.id;
+
+  db.run('delete from notes where id=?', id, (err) => {
+    if (err) throw err;
+
+    res.redirect('/');
+  });
+});
+
+app.get('/notes/:id/edit', (req, res) => {
+  let id = req.params.id;
+  let select = 'select * from notes WHERE id = ?';
+  db.get(select, id, (err, row) => {
+    res.render('update', { id: id, note: row });
+  });
+});
+
+app.post(`/notes/:id/edit`, (req, res) => {
+  let input = req.body;
+  let id = req.params.id;
+  let update = 'update notes set content = ? where id = ?';
+  let select = 'select * from notes where id = ?';
+
+  if (input.note.length === 0) {
+    db.get(select, id, (err, row) => {
+      res.render('edit', { note: row, id: id, fail: true });
+    });
+  } else {
+    db.run(update, [input.note, id], (err) => {
+      if (err) throw err;
+    });
+
+    res.redirect('/');
   }
 });
 

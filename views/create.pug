@@ -1,9 +1,9 @@
 extends layout.pug
 block Content
     .add-container
-        h2 New note
-        if fail
-            p.fail Input cannot be empty please fill in the form...
+        h3 New note
+        if error
+            p.error Input cannot be empty please fill in the form...
         form.addForm(action="/create", method="post")
             input.addInput(type="text" name = "note")
             button.btnAdd Add new note
